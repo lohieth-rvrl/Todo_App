@@ -13,7 +13,7 @@ const todo = require("./routes/todo");
 connectDB();
 
 // cors
-app.use(cors({ origin: true, credentials: true })); // added
+app.use(cors({ origin: process.env.CLIENT_URL, credentials: true })); // added
 
 // initialize middleware
 app.use(express.json({ extended: false }));
@@ -22,12 +22,13 @@ app.get("/", (req, res) => res.send("Server up and running"));
 // use routes
 app.use("/api/todo", todo);
 
+const authRoutes = require("./routes/auth");
+app.use("/api/auth", authRoutes);
+
 // setting up port
 const PORT = process.env.PORT || 8000;
 
 app.listen(PORT, () => {
-    console.log(`server is running on http://localhost:${PORT}`);
+    console.log(`server is running on ${PORT}`);
 });
 
-const authRoutes = require("./routes/auth");
-app.use("/api/auth", authRoutes);
