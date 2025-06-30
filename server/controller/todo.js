@@ -1,21 +1,19 @@
 // controllers/todo.js
 const Todo = require("../models/todo");
 
-// exports.getAllTodo = (req, res) => {
-//     Todo.find()
-//         .then((todo) => res.json(todo))
-//         .catch((err) =>
-//             res
-//                 .status(404)
-//                 .json({ message: "Todo not found", error: err.message })
-//         );
-// };
+
 // exports.getAllTodo = async (req, res) => {
 //   try {
 //     const userId = req.query.userId;
 //     if (!userId) return res.status(400).json({ message: "User ID required" });
 
-//     const todos = await Todo.find({ userId });
+//     const todos = await Todo.find({
+//       $or: [
+//         { userId },
+//         { sharedWith: userId } // or email, depending on implementation
+//       ]
+//     });
+
 //     res.json(todos);
 //   } catch (err) {
 //     res.status(500).json({ message: "Failed to fetch todos", error: err.message });
@@ -23,13 +21,13 @@ const Todo = require("../models/todo");
 // };
 exports.getAllTodo = async (req, res) => {
   try {
-    const userId = req.query.userId;
-    if (!userId) return res.status(400).json({ message: "User ID required" });
+    const { userId, email } = req.query;
+    if (!userId && !email) return res.status(400).json({ message: "User ID or Email required" });
 
     const todos = await Todo.find({
       $or: [
         { userId },
-        { sharedWith: userId } // or email, depending on implementation
+        { sharedWith: email }
       ]
     });
 
@@ -38,7 +36,6 @@ exports.getAllTodo = async (req, res) => {
     res.status(500).json({ message: "Failed to fetch todos", error: err.message });
   }
 };
-
 
 
 exports.postCreateTodo = (req, res) => {
