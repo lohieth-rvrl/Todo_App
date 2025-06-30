@@ -12,17 +12,22 @@ connectDB();
 const app = express();
 
 const corsOptions = {
-  origin: process.env.CLIENT_URL,
+  origin: [process.env.CLIENT_URL, "http://localhost:5173"], // Allow both prod and local
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"],
+  allowedHeaders: ["Content-Type", "Authorization", "x-user-id"],
 };
 
+// Apply CORS globally
 app.use(cors(corsOptions));
-// app.options("*", cors(corsOptions));
+
+// Explicit OPTIONS handling for specific routes
+app.options("/api/auth/google", cors(corsOptions)); // Google OAuth
+app.options("/api/todo", cors(corsOptions));       // TODO routes
 
 app.use(express.json());
 
+// Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/todo", todoRoutes);
 
