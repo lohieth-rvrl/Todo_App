@@ -19,8 +19,8 @@ This application was developed to demonstrate complete full-stack engineering ca
 
 ## 🌐 Live Application
 
-- **Frontend (Vercel)**: [https://todo-app-ebon-theta-75.vercel.app](https://todo-app-ebon-theta-75.vercel.app)  
-- **Backend (Render)**: [https://managatodo.onrender.com](https://managatodo.onrender.com)
+- **Frontend (Vercel)**: [https://todo-app-ebon-theta-75.vercel.app](https://todo-app-tau-blue-88.vercel.app/)  
+- **Backend (Render)**: [https://managatodo.onrender.com](https://todobackend-focg.onrender.com)
 
 ---
 
