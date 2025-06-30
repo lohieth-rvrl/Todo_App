@@ -1,20 +1,16 @@
-// server.js
 const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const connectDB = require("./config/db");
 
 const authRoutes = require("./routes/auth");
+const todoRoutes = require("./routes/todo");
 
-// Load environment variables
 dotenv.config();
-
-// Connect to MongoDB
 connectDB();
 
 const app = express();
 
-// CORS Configuration
 const corsOptions = {
   origin: process.env.CLIENT_URL,
   credentials: true,
@@ -23,21 +19,16 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-app.options("*", cors(corsOptions)); // Handle preflight requests
+// app.options("*", cors(corsOptions));
 
-// Middleware
 app.use(express.json());
 
-// Routes
 app.use("/api/auth", authRoutes);
+app.use("/api/todo", todoRoutes);
 
-// Root Route (optional)
 app.get("/", (req, res) => {
   res.send("API is running...");
 });
 
-// Start Server
 const PORT = process.env.PORT || 8000;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
