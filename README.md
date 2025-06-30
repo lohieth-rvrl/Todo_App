@@ -26,7 +26,7 @@ This application was developed to demonstrate complete full-stack engineering ca
 
 ## 🧪 Loom Demo
 
-🎥 [Watch Project Walkthrough](https://drive.google.com/drive/folders/1ea-OosluAphywusuiKs_E23OotzCM5cl?usp=sharing)
+🎥 [Watch Project Walkthrough](https://drive.google.com/file/d/1GpBqdKa1GLdtKHaZIoRv0UCPme5bneXd/view?usp=sharing)
 
 ---
 
